@@ -5,7 +5,18 @@ export default {
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                "lato": ["Lato", "sans - serif"],
+                "josefin": ["Josefin Sans", "sans - serif"]
+            },
+            backgroundColor: {
+                "primary": "#FB2E86"
+            },
+            color: {
+                "primary": "#FB2E86"
+            }
+        },
     },
     plugins: [],
 }
