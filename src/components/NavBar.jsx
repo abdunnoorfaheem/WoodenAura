@@ -20,7 +20,7 @@ const NavBar = () => {
           <img src={Logo} alt="" />
         </div>
         <div>
-          <ul className={`lg:flex lg:gap-24 lg:static  ${menu === true ? "duration-700 ease-in-out absolute top-12 left-0 w-full bg-slate-300 text-center" : "absolute top-12 -left-[700px] w-full "}`}>
+          <ul className={`lg:flex lg:gap-24 lg:static  ${menu === true ? "duration-1000 ease-in-out absolute top-12 left-0 w-full bg-slate-300 text-center pb-4 z-50" : "absolute top-12 -left-[700px] w-full "}`}>
             <li className="hover:text-purple-700">
               <Link to="/">Home</Link>
             </li>
