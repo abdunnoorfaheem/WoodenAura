@@ -14,7 +14,7 @@ const NavBar = () => {
   console.log(menu);
 
   return (
-    <section className="font-lato font-bold">
+    <section className="font-lato font-bold border-2 border-red-700">
       <nav className="flex justify-between items-center py-4 px-8 bg-gray-300">
         <div>
           <img src={Logo} alt="" />

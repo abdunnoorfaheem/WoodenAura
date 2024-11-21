@@ -14,7 +14,7 @@ export default {
                 "primary": "#FB2E86"
             },
             color: {
-                "primary": "#FB2E86"
+                "primaryColor": "#FB2E86"
             }
         },
     },
