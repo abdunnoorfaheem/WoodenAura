@@ -11,8 +11,8 @@ const FeaturedProducts = () => {
         Featured Products
       </h3>
       <div className="container mx-auto">
-        <div className="flex justify-between">
-          <div className="w-[24%]  shadow-xl  rounded-md group">
+        <div className="md:flex justify-between">
+          <div className="md:w-[24%]  shadow-xl  rounded-md group">
          
             <div className="flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden">
             
@@ -42,7 +42,7 @@ const FeaturedProducts = () => {
               <p className="mt-1">$42.00</p>
             </div>
           </div>
-          <div className="w-[24%]  shadow-xl  rounded-md group">
+          <div className="md:w-[24%]  shadow-xl  rounded-md group">
          
             <div className="flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden">
             
@@ -72,7 +72,7 @@ const FeaturedProducts = () => {
               <p className="mt-1">$42.00</p>
             </div>
           </div>
-          <div className="w-[24%]  shadow-xl  rounded-md group">
+          <div className="md:w-[24%]  shadow-xl  rounded-md group">
          
             <div className="flex  flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden">
             
@@ -102,7 +102,7 @@ const FeaturedProducts = () => {
               <p className="mt-1">$42.00</p>
             </div>
           </div>
-          <div className="w-[24%]  shadow-xl  rounded-md group">
+          <div className="md:w-[24%]  shadow-xl  rounded-md group">
          
             <div className="flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden">
             
