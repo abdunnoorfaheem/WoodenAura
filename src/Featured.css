@@ -1,0 +1,17 @@
+.slick-dots li{
+
+    background-color: #FEBAD7;height: 10px !important;
+    width: 30px !important;
+    border-radius: 10px !important;
+   
+}
+.slick-dots   button::before {
+    visibility: hidden;
+     
+    
+    
+}
+
+.slick-dots .slick-active{
+    background-color: #FB2E86;
+}
