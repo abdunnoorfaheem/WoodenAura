@@ -9,8 +9,10 @@ import { apiData } from "./ContextApi";
 
 const FeaturedProducts = () => {
   let dataAll = useContext(apiData);
+  
+  
 
-  let featuredProducts=dataAll.filter((item)=>(item.category=="beauty"))
+  let featuredProducts=dataAll.filter((item)=>(item.category=="fragrances"))
 
   const settings = {
     dots: true,
@@ -21,7 +23,7 @@ const FeaturedProducts = () => {
   };
 
   return (
-    <section className="">
+    <section className="mb-4">
       <h3 className="text-2xl md:text-5xl font-bold text-center pt-20 text-[#1A0B5B] mb-8">
         Featured Products
       </h3>
@@ -30,7 +32,7 @@ const FeaturedProducts = () => {
          
          {featuredProducts.map((item)=>(
            <div className="!w-[95%] rounded-md group shadow-md">
-           <div className="flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden">
+           <div className="md:flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden ">
              <img className="" src={item.thumbnail} alt="Image" />
 
              <button className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:px-4  md:py-2  mt-2 px-[2px] py-[2px] bg-[#08D15F] rounded-sm text-white text-[12px] duration-700 ease-in-out  group-hover:bottom-4 ">
@@ -52,17 +54,17 @@ const FeaturedProducts = () => {
              </div>
            </div>
 
-           <div className="text-center py-6 group-hover:bg-[#2F1AC4] group-hover:text-white box-border">
-             <h4 className="text-pink-600 font-bold lg:text-xl group-hover:text-white text-sm">
+           <div className="text-center py-6 group-hover:bg-[#2F1AC4] group-hover:text-white">
+             <h4 className="text-pink-600 font-bold lg:text-xl group-hover:text-white text-[12px]">
                {item.title}
              </h4>
-             <div className="flex justify-center gap-4 mt-2">
+             <div className="flex justify-center gap-4 mt-2 max-h-10">
                <p className="rounded-xl h-[5px] w-[15px] bg-red-700"></p>
                <p className="rounded-xl h-[5px] w-[15px] bg-green-700"></p>
                <p className="rounded-xl h-[5px] w-[15px] bg-blue-700"></p>
              </div>
-             <p className="mt-1 text-sm lg:text-lg">Code:Y523201</p>
-             <p className="mt-1">{item.price}</p>
+             <p className="mt-1 text-[8px] lg:text-lg">Code:Y523201</p>
+             <p className="mt-1">${item.price}</p>
            </div>
          </div>
          ))}

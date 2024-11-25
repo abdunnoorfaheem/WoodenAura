@@ -10,7 +10,7 @@ const ContextApi = ({ children }) => {
       setData(response.data.products);
     });
   }, []);
-  //   console.log(data);
+    // console.log(data);
 
   return (<apiData.Provider value={data}>{children}</apiData.Provider>);
 };
