@@ -6,7 +6,7 @@ import Support from '../assets/24-hours-support.png';
  
 const ServiceOffer = () => {
   return (
-   <section>
+   <section className='pb-20'>
     <div>
         <h1 className='text-[#151875] text-2xl md:text-4xl text-center pt-8 mb-4 font-bold'>What Service Offer!</h1>
     </div>
@@ -42,7 +42,7 @@ const ServiceOffer = () => {
         <div className='flex justify-center items-center py-8'>
             <img src={Support} alt="" />
         </div>
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center pb-8'>
             <h3 className='text-xl font-bold'>24/7 Support</h3>
             <p className='text-center'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa purus gravida.</p>
         </div>

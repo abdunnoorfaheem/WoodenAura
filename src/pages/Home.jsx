@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import FeaturedProducts from '../components/FeaturedProducts'
 import LeatestProducts from '../components/LeatestProducts'
 import ServiceOffer from '../components/ServiceOffer'
+import UniqueFeatured from '../components/UniqueFeatured'
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
     <FeaturedProducts/>
     <LeatestProducts/>
     <ServiceOffer/>
+    <UniqueFeatured/>
     </>
   )
 }
