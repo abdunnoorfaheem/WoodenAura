@@ -5,6 +5,7 @@ import FeaturedProducts from '../components/FeaturedProducts'
 import LeatestProducts from '../components/LeatestProducts'
 import ServiceOffer from '../components/ServiceOffer'
 import UniqueFeatured from '../components/UniqueFeatured'
+import TrendingProducts from '../components/TrendingProducts'
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
     <LeatestProducts/>
     <ServiceOffer/>
     <UniqueFeatured/>
+    <TrendingProducts/>
     </>
   )
 }

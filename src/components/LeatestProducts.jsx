@@ -10,7 +10,7 @@ const LeatestProducts = () => {
   let dataShow=useContext(apiData);
 
   
-let filterData=dataShow.filter((item)=> item.id >=1 && item.id <=8)
+let filterData=dataShow.filter((item)=>item.id >=1 && item.id <=8)
   
   return (
     <section className=''>
