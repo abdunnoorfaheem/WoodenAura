@@ -7,6 +7,7 @@ import ServiceOffer from '../components/ServiceOffer'
 import UniqueFeatured from '../components/UniqueFeatured'
 import TrendingProducts from '../components/TrendingProducts'
 import DiscountItem from '../components/DiscountItem'
+import TopCategories from '../components/TopCategories'
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
     <UniqueFeatured/>
     <TrendingProducts/>
     <DiscountItem/>
+    <TopCategories/>
     </>
   )
 }
