@@ -9,6 +9,8 @@ import TrendingProducts from '../components/TrendingProducts'
 import DiscountItem from '../components/DiscountItem'
 import TopCategories from '../components/TopCategories'
 import BelowBanner from '../components/BelowBanner'
+import Company from '../components/Company'
+import LatastBlog from '../components/LatastBlog'
 
 
 const Home = () => {
@@ -23,6 +25,8 @@ const Home = () => {
     <DiscountItem/>
     <TopCategories/>
     <BelowBanner/>
+    <Company/>
+    <LatastBlog/>
     </>
   )
 }
