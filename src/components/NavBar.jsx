@@ -27,10 +27,10 @@ const NavBar = () => {
             <li className="hover:text-purple-700">
               <Link to="/pages">Pages</Link>
             </li>
-            <li className="hover:text-purple-700">Products</li>
-            <li className="hover:text-purple-700">Blog</li>
-            <li className="hover:text-purple-700">Shop</li>
-            <li className="hover:text-purple-700">Contact</li>
+            <li className="hover:text-purple-700"><Link to="/products">Products</Link></li>
+            <li className="hover:text-purple-700"><Link to="/blog">Blog</Link></li>
+            <li className="hover:text-purple-700"><Link to="/shop">Shop</Link></li>
+            <li className="hover:text-purple-700"><Link to="/contact">Contact</Link></li>
             <li>
               <div className="flex items-center justify-center">
                 <input

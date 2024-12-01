@@ -10,7 +10,7 @@ const ServiceOffer = () => {
     <div>
         <h1 className='text-[#151875] text-2xl md:text-4xl text-center pt-8 mb-4 font-bold'>What Service Offer!</h1>
     </div>
-    <div className='container mx-auto md:flex gap-8 mt-12 '>
+    <div className='container mx-auto md:flex gap-12 mt-12 mr-20 '>
         <div className='bg-[#f3f1f1] md:w-[20%] '> 
         <div className='flex justify-center items-center py-8'>
             <img src={Delivery} alt="" />
