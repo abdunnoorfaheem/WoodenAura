@@ -1,8 +1,11 @@
 import React from 'react'
+import PageHeading from '../components/PageHeading'
 
 const Shop = () => {
   return (
-    <div>Shop</div>
+    <>
+    <PageHeading title='Shop Grid Default' pageName='Shop Grid Default'/>
+    </>
   )
 }
 
