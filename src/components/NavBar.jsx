@@ -11,7 +11,7 @@ const NavBar = () => {
   let menuBar = () => {
     setMenu(!menu);
   };
-  console.log(menu);
+  // console.log(menu);
 
   return (
     <section className="font-lato font-bold">

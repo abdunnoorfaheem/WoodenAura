@@ -1,21 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PageHeading from "../components/PageHeading";
 import { apiData } from "../components/ContextApi";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiZoomIn } from "react-icons/ci";
 import Company from "../components/Company";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const Shop = () => {
   let data = useContext(apiData);
-  console.log(data);
+  
+  let [category,setCategory]=useState([]);
+
+  useEffect(()=>{
+    
+    setCategory([...new Set(data.map((item)=>item.category))])
+  },[data]);
+
+  let [categoryShow,setCategoryShow]=useState(false);
+
+
+
+
 
   return (
     <>
       <PageHeading title="Shop Grid Default" pageName="Shop Grid Default" />
-      <div className="mt-4 mb-4 container mx-auto flex justify-between flex-wrap gap-6">
+      <div className="container mx-auto">
+      <div className="flex">
+        <div className="w-[30%]">
+          <h3 onClick={()=>setCategoryShow(!categoryShow)} className="flex items-center gap-2 text-xl md:text-3xl">Category List <IoMdArrowDropdown /></h3>
+          {categoryShow && <ul className="h-36 overflow-y-scroll">
+          {category.map((item)=>(
+            <li>{item}</li>
+          ))}
+          
+        </ul>
+          }
+        </div>
+        <div className="w-[70%] mt-4 mb-4 container mx-auto flex justify-between flex-wrap gap-6">
         {data.map((item) => (
-          <div className="w-[32%] rounded-md group shadow-md">
+          <div className="w-[30%] rounded-md group shadow-md">
           <div className="md:flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden ">
             <img className="" src={item.thumbnail} alt="Image" />
 
@@ -53,7 +78,9 @@ hover:bg-[#FFFFFF] rounded-2xl"
         </div>
         ))}
       </div>
+      </div>
       <Company/>
+      </div>
     </>
   );
 };
