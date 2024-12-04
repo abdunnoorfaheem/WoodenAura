@@ -1,8 +1,11 @@
 import React from 'react'
+import PageHeading from '../components/PageHeading'
 
 const Pages = () => {
   return (
-    <div>Pages</div>
+    <>
+    <PageHeading/>
+    </>
     
   )
 }

@@ -57,7 +57,7 @@ const Footer = () => {
 
       <div className="w-[100%] md:h-[53px] bg-[#E7E4F8] ">
         <div className="md:flex justify-between items-center text-center py-2  md:mx-[250px]">
-        <p className="text-[#9DA0AE] text-lg md:text-2xl">©Webecy - All Rights Reserved</p>
+        <p className="text-[#9DA0AE] text-lg md:text-2xl">©WoodenAura - All Rights Reserved</p>
             <div className="flex gap-4 ml-[134px] md:ml-0 mt-1">
                 <img className="h-[19px] w-[19px]" src={Facebook} alt="" />
                 <img className="h-[19px] w-[19px]" src={Instagram} alt="" />
