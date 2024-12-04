@@ -11,13 +11,18 @@ const Shop = () => {
   let data = useContext(apiData);
   
   let [category,setCategory]=useState([]);
+  let [brand,setBrand]=useState([]);
 
   useEffect(()=>{
     
     setCategory([...new Set(data.map((item)=>item.category))])
+    setBrand([...new Set(data.map((item)=>item.brand))])
   },[data]);
+  console.log(brand);
+  
 
   let [categoryShow,setCategoryShow]=useState(false);
+  let [brandShow,setBrandShow]=useState(false);
 
 
 
@@ -29,14 +34,26 @@ const Shop = () => {
       <div className="container mx-auto">
       <div className="flex">
         <div className="w-[30%]">
-          <h3 onClick={()=>setCategoryShow(!categoryShow)} className="flex items-center gap-2 text-xl md:text-3xl">Category List <IoMdArrowDropdown /></h3>
+         <div className="mb-3"> <h3 onClick={()=>setCategoryShow(!categoryShow)} className="flex items-center gap-2 text-xl md:text-3xl">Category List <IoMdArrowDropdown /></h3>
           {categoryShow && <ul className="h-36 overflow-y-scroll">
           {category.map((item)=>(
             <li>{item}</li>
           ))}
           
         </ul>
-          }
+          }</div>
+          <div className="">
+            <h3 onClick={()=>setBrandShow(!brandShow)} className="flex items-center gap-2 text-xl md:text-3xl">Brands Item <IoMdArrowDropdown /></h3>
+           {brandShow && 
+           <ul className="h-36 overflow-y-scroll">
+            {
+            brand.map((item)=>(
+              <li>{item}</li>
+            ))
+           }
+           </ul>
+           }
+          </div>
         </div>
         <div className="w-[70%] mt-4 mb-4 container mx-auto flex justify-between flex-wrap gap-6">
         {data.map((item) => (
