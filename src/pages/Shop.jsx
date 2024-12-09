@@ -11,37 +11,79 @@ const Shop = () => {
   let data = useContext(apiData);
 
   let [category, setCategory] = useState([]);
-  let [brands, setBrands] = useState([]); // Added for storing unique brands
-
+  let [brands, setBrands] = useState([]);
+  
   useEffect(() => {
     setCategory([...new Set(data.map((item) => item.category))]);
-    setBrands([...new Set(data.map((item) => item.brand))]); // Extract unique brands
+    setBrands([...new Set(data.map((item) => item.brand))]);
   }, [data]);
 
   let [categoryShow, setCategoryShow] = useState(false);
   let [priceShow, setPriceShow] = useState(false);
-  let [brandShow, setBrandShow] = useState(false); // Show/Hide brand filter
+  let [brandShow, setBrandShow] = useState(false);
 
   let [categoryFilter, setCategoryFilter] = useState([]);
-  let [brandFilter, setBrandFilter] = useState([]); // Store selected brand filtered data
+  let [brandFilter, setBrandFilter] = useState([]);
   let [priceItem, setPriceItem] = useState([]);
 
   let handleCategory = (cat) => {
-    let filterCategoryData = data.filter((item) => item.category === cat);
-    setCategoryFilter(filterCategoryData);
+    setCategoryFilter(data.filter((item) => item.category === cat));
+    setPriceItem([]);
+    setBrandFilter([]);
   };
 
   let handleBrand = (brand) => {
-    let filterBrandData = data.filter((item) => item.brand === brand);
-    setBrandFilter(filterBrandData);
+    setBrandFilter(data.filter((item) => item.brand === brand));
+    setCategoryFilter([]);
+    setPriceItem([]);
   };
 
   let priceHandle = (value) => {
-    let priceFiltered = data.filter(
+    setPriceItem(data.filter(
       (item) => parseFloat(item.price) > value.low && parseFloat(item.price) <= value.high
-    );
-    setPriceItem(priceFiltered);
+    ));
+    setCategoryFilter([]);
+    setBrandFilter([]);
   };
+
+
+let handlePre=()=>{
+  if(currentPage >1){
+    setCurrentPage(currentPage-1);
+  }
+}
+
+let handleNext=()=>{
+  if(currentPage !== pageNumbers){
+    setCurrentPage(currentPage+1);
+  }
+}
+
+
+
+
+
+  let [currentPage,setCurrentPage] =useState(1);
+
+  let [perPage,setPerPage]=useState(15);
+
+  let lastItemIndex=currentPage*perPage;
+
+  let firstItemIndex=lastItemIndex-perPage;
+
+  let perPageProduct=data.slice(firstItemIndex,lastItemIndex);
+
+  console.log(perPageProduct);
+  
+
+  let pageNumbers=Math.ceil(data.length/perPage);
+  
+let numbers=useState([]);
+  for(let i=1;i<=pageNumbers;i++){
+numbers.push(i)
+
+  }
+  
 
   const filteredData = categoryFilter.length > 0
     ? categoryFilter
@@ -49,7 +91,11 @@ const Shop = () => {
     ? brandFilter
     : priceItem.length > 0
     ? priceItem
-    : data;
+    : perPageProduct;
+
+
+   
+    
 
   return (
     <>
@@ -57,7 +103,7 @@ const Shop = () => {
       <div className="container mx-auto">
         <div className="md:flex">
           <div className="w-full md:w-[30%]">
-            {/* Category Filter Section */}
+            {/* Category Filter */}
             <div className="mb-3">
               <h3
                 onClick={() => setCategoryShow(!categoryShow)}
@@ -80,13 +126,13 @@ const Shop = () => {
               )}
             </div>
 
-            {/* Brand Filter Section */}
+            {/* Brand Filter */}
             <div>
               <h3
                 onClick={() => setBrandShow(!brandShow)}
                 className="flex items-center gap-2 text-xl md:text-3xl"
               >
-                Brand <IoMdArrowDropdown />
+                Brand List <IoMdArrowDropdown />
               </h3>
               {brandShow && (
                 <ul className="h-36 overflow-y-scroll">
@@ -103,13 +149,13 @@ const Shop = () => {
               )}
             </div>
 
-            {/* Price Filter Section */}
+            {/* Price Filter */}
             <div>
               <h3
                 onClick={() => setPriceShow(!priceShow)}
                 className="flex items-center gap-2 text-xl md:text-3xl"
               >
-                Price <IoMdArrowDropdown />
+                Price List <IoMdArrowDropdown />
               </h3>
               {priceShow && (
                 <ul className="flex flex-col gap-3 border-b-2">
@@ -142,7 +188,7 @@ const Shop = () => {
             </div>
           </div>
 
-          {/* Product Listing Section */}
+          {/* Product Listing */}
           <div className="md:w-[70%] px-4 mt-4 mb-4 container mx-auto md:flex justify-between flex-wrap gap-6">
             {filteredData.map((item) => (
               <div key={item.id} className="md:w-[30%] rounded-md group shadow-md mb-4">
@@ -179,8 +225,22 @@ const Shop = () => {
               </div>
             ))}
           </div>
+        
         </div>
+        <div >
+            {
+              numbers.length>0 &&
+             <ul className="flex items-center justify-center md:gap-6 ">
+              <li className="border-2 p-2" onClick={handlePre}>Previous</li>
+               {numbers.map((item)=>(
+                <li className={`px-3 py-2 border-2 ${currentPage== item ? "bg-black text-white": ""} `} onClick={()=>setCurrentPage(item)}>{item}</li>
+              ))}
+              <li className="border-2 p-2" onClick={handleNext}>Next</li>
+             </ul>
+            }
+          </div>
         <Company />
+        
       </div>
     </>
   );
