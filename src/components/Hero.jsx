@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from "react-slick";
 import Banner from '../assets/banner.png';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     const settings = {
@@ -48,7 +49,7 @@ const Hero = () => {
             <h1 className='text-3xl lg:text-5xl font-bold mt-3'>New Furniture Collection <br /> Trends in 2024</h1>
             <p className='mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing <br />in phasellus non in justo.</p>
             <div>
-            <button className='bg-primary text-white px-4 py-2 rounded-sm font-thin font-josefin mt-4'>Shop Now</button>
+            <button className='bg-primary text-white px-4 py-2 rounded-sm font-thin font-josefin mt-4'><Link to="/shop">Shop Now</Link></button>
             </div>
             </div>
             </div>

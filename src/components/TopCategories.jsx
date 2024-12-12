@@ -6,7 +6,7 @@ const TopCategories = () => {
 
 let data=useContext(apiData);
 
-console.log(data);
+// console.log(data);
 
 let filterData=data.filter((item)=>item.id>=1 && item.id<=3)
   

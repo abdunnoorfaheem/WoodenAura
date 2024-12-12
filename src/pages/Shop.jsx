@@ -78,7 +78,7 @@ let handleNext=()=>{
 
   let pageNumbers=Math.ceil(data.length/perPage);
   
-let numbers=useState([]);
+let numbers=[];
   for(let i=1;i<=pageNumbers;i++){
 numbers.push(i)
 
@@ -231,11 +231,11 @@ numbers.push(i)
             {
               numbers.length>0 &&
              <ul className="flex items-center justify-center md:gap-6 ">
-              <li className="border-2 p-2" onClick={handlePre}>Previous</li>
+              <li className="border-2 p-2 font-semibold" onClick={handlePre}>Previous</li>
                {numbers.map((item)=>(
-                <li className={`px-3 py-2 border-2 ${currentPage== item ? "bg-black text-white": ""} `} onClick={()=>setCurrentPage(item)}>{item}</li>
+                <li className={`px-3 py-2 border-2 ${currentPage== item ? "bg-black text-white": ""}`} onClick={()=>setCurrentPage(item)}>{item}</li>
               ))}
-              <li className="border-2 p-2" onClick={handleNext}>Next</li>
+              <li className="border-2 px-2 py-2 font-semibold" onClick={handleNext}>Next</li>
              </ul>
             }
           </div>

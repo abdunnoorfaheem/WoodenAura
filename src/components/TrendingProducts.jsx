@@ -8,7 +8,7 @@ import smallChairThree from '../assets/smallChair3.png'
 const TrendingProducts = () => {
 
     let data=useContext(apiData);
-console.log(data);
+// console.log(data);
 
 let filtered=data.filter((item)=>item.id>=1 && item.id<=4)
 
