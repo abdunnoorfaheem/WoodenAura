@@ -6,6 +6,7 @@ import { CiHeart } from "react-icons/ci";
 import { CiZoomIn } from "react-icons/ci";
 import Company from "../components/Company";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Shop = () => {
   let data = useContext(apiData);
@@ -210,7 +211,7 @@ numbers.push(i)
                   </div>
                 </div>
 
-                <div className="text-center py-6 group-hover:bg-[#2F1AC4] group-hover:text-white">
+                <div className="text-center group-hover:bg-[#2F1AC4] group-hover:text-white">
                   <h4 className="text-pink-600 font-bold lg:text-xl group-hover:text-white text-[12px]">
                     {item.title}
                   </h4>
@@ -221,7 +222,9 @@ numbers.push(i)
                   </div>
                   <p className="mt-1 text-[8px] lg:text-lg">Code:Y523201</p>
                   <p className="mt-1">${item.price}</p>
+                  <button className="border-2 bg-[#FB2E86] text-white w-full py-2 font-semibold"><Link to="/shoppingCart">Add To Cart</Link></button>
                 </div>
+                
               </div>
             ))}
           </div>
