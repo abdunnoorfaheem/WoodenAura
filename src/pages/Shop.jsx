@@ -7,6 +7,8 @@ import { CiZoomIn } from "react-icons/ci";
 import Company from "../components/Company";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { increment } from "../components/slice/cartSlice";
 
 const Shop = () => {
   let data = useContext(apiData);
@@ -95,7 +97,10 @@ numbers.push(i)
     : perPageProduct;
 
 
-   
+   let dispatch=useDispatch();
+
+   dispatch(increment(1))
+
     
 
   return (

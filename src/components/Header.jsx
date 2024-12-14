@@ -4,6 +4,7 @@ import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { CiUser } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <section className="bg-[#7E33E0] text-white md:h-[44px] py-2 hidden md:block">
@@ -39,7 +40,7 @@ const Header = () => {
             <p>Wishlist</p>
             <CiHeart />
           </div>
-          <CiShoppingCart />
+          <Link to="/shoppingCart"><CiShoppingCart /></Link>
         </div>
       </div>
     </section>

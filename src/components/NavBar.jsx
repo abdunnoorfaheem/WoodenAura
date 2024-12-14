@@ -9,7 +9,7 @@ import { apiData } from "./ContextApi";
 const NavBar = () => {
 
   let data=useContext(apiData);
-  console.log(data);
+  // console.log(data);
   
   let [menu, setMenu] = useState(false);
 
