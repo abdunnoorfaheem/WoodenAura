@@ -7,15 +7,15 @@ import { CiZoomIn } from "react-icons/ci";
 import Company from "../components/Company";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { increment } from "../components/slice/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../components/slice/cartSlice";
 
 const Shop = () => {
   let data = useContext(apiData);
 
   let [category, setCategory] = useState([]);
   let [brands, setBrands] = useState([]);
-  
+
   useEffect(() => {
     setCategory([...new Set(data.map((item) => item.category))]);
     setBrands([...new Set(data.map((item) => item.brand))]);
@@ -42,66 +42,62 @@ const Shop = () => {
   };
 
   let priceHandle = (value) => {
-    setPriceItem(data.filter(
-      (item) => parseFloat(item.price) > value.low && parseFloat(item.price) <= value.high
-    ));
+    setPriceItem(
+      data.filter(
+        (item) =>
+          parseFloat(item.price) > value.low &&
+          parseFloat(item.price) <= value.high
+      )
+    );
     setCategoryFilter([]);
     setBrandFilter([]);
   };
 
+  let handlePre = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-let handlePre=()=>{
-  if(currentPage >1){
-    setCurrentPage(currentPage-1);
+  let handleNext = () => {
+    if (currentPage !== pageNumbers) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  let [currentPage, setCurrentPage] = useState(1);
+
+  let [perPage, setPerPage] = useState(15);
+
+  let lastItemIndex = currentPage * perPage;
+
+  let firstItemIndex = lastItemIndex - perPage;
+
+  let perPageProduct = data.slice(firstItemIndex, lastItemIndex);
+
+  // console.log(perPageProduct);
+
+  let pageNumbers = Math.ceil(data.length / perPage);
+
+  let numbers = [];
+  for (let i = 1; i <= pageNumbers; i++) {
+    numbers.push(i);
   }
-}
 
-let handleNext=()=>{
-  if(currentPage !== pageNumbers){
-    setCurrentPage(currentPage+1);
-  }
-}
+  const filteredData =
+    categoryFilter.length > 0
+      ? categoryFilter
+      : brandFilter.length > 0
+      ? brandFilter
+      : priceItem.length > 0
+      ? priceItem
+      : perPageProduct;
 
+  let dispatch = useDispatch();
 
-
-
-
-  let [currentPage,setCurrentPage] =useState(1);
-
-  let [perPage,setPerPage]=useState(15);
-
-  let lastItemIndex=currentPage*perPage;
-
-  let firstItemIndex=lastItemIndex-perPage;
-
-  let perPageProduct=data.slice(firstItemIndex,lastItemIndex);
-
-  console.log(perPageProduct);
-  
-
-  let pageNumbers=Math.ceil(data.length/perPage);
-  
-let numbers=[];
-  for(let i=1;i<=pageNumbers;i++){
-numbers.push(i)
-
-  }
-  
-
-  const filteredData = categoryFilter.length > 0
-    ? categoryFilter
-    : brandFilter.length > 0
-    ? brandFilter
-    : priceItem.length > 0
-    ? priceItem
-    : perPageProduct;
-
-
-   let dispatch=useDispatch();
-
-   dispatch(increment(1))
-
-    
+  let handleAddToCart = (product) => {
+    dispatch(addToCart({...product,qty:1}));
+  };
 
   return (
     <>
@@ -197,7 +193,10 @@ numbers.push(i)
           {/* Product Listing */}
           <div className="md:w-[70%] px-4 mt-4 mb-4 container mx-auto md:flex justify-between flex-wrap gap-6">
             {filteredData.map((item) => (
-              <div key={item.id} className="md:w-[30%] rounded-md group shadow-md mb-4">
+              <div
+                key={item.id}
+                className="md:w-[30%] rounded-md group shadow-md mb-4"
+              >
                 <div className="md:flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden">
                   <img className="" src={item.thumbnail} alt="Image" />
                   <button className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:px-4 md:py-2 mt-2 px-[2px] py-[2px] bg-[#08D15F] rounded-sm text-white text-[12px] duration-700 ease-in-out group-hover:bottom-4">
@@ -227,28 +226,43 @@ numbers.push(i)
                   </div>
                   <p className="mt-1 text-[8px] lg:text-lg">Code:Y523201</p>
                   <p className="mt-1">${item.price}</p>
-                  <button className="border-2 bg-[#FB2E86] text-white w-full py-2 font-semibold"><Link to="/shoppingCart">Add To Cart</Link></button>
+                  <button
+                    onClick={() => handleAddToCart(item)}
+                    className="border-2 bg-[#FB2E86] text-white w-full py-2 font-semibold"
+                  >
+                    Add To Cart
+                  </button>
                 </div>
-                
               </div>
             ))}
           </div>
-        
         </div>
-        <div >
-            {
-              numbers.length>0 &&
-             <ul className="flex items-center justify-center md:gap-6 ">
-              <li className="border-2 p-2 font-semibold" onClick={handlePre}>Previous</li>
-               {numbers.map((item)=>(
-                <li className={`px-3 py-2 border-2 ${currentPage== item ? "bg-black text-white": ""}`} onClick={()=>setCurrentPage(item)}>{item}</li>
+        <div>
+          {numbers.length > 0 && (
+            <ul className="flex items-center justify-center md:gap-6 ">
+              <li className="border-2 p-2 font-semibold" onClick={handlePre}>
+                Previous
+              </li>
+              {numbers.map((item) => (
+                <li
+                  className={`px-3 py-2 border-2 ${
+                    currentPage == item ? "bg-black text-white" : ""
+                  }`}
+                  onClick={() => setCurrentPage(item)}
+                >
+                  {item}
+                </li>
               ))}
-              <li className="border-2 px-2 py-2 font-semibold" onClick={handleNext}>Next</li>
-             </ul>
-            }
-          </div>
+              <li
+                className="border-2 px-2 py-2 font-semibold"
+                onClick={handleNext}
+              >
+                Next
+              </li>
+            </ul>
+          )}
+        </div>
         <Company />
-        
       </div>
     </>
   );
