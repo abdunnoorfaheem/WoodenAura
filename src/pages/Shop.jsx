@@ -9,6 +9,8 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../components/slice/cartSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Shop = () => {
   let data = useContext(apiData);
@@ -96,8 +98,11 @@ const Shop = () => {
   let dispatch = useDispatch();
 
   let handleAddToCart = (product) => {
-    dispatch(addToCart({...product,qty:1}));
+    dispatch(addToCart({ ...product, qty: 1 }));
+    toast.success('🦄 Cart Added Successfully!');
   };
+
+
 
   return (
     <>
@@ -232,6 +237,19 @@ const Shop = () => {
                   >
                     Add To Cart
                   </button>
+                  <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+transition: Bounce
+/>
                 </div>
               </div>
             ))}
