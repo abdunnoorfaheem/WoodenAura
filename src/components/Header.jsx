@@ -5,7 +5,20 @@ import { CiUser } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Header = () => {
+
+
+let cartItemNumber =useSelector((state)=>state.cartItemSlice.cartItems);
+
+
+
+
+
+
+
+
+
   return (
     <section className="bg-[#7E33E0] text-white md:h-[44px] py-2 hidden md:block">
       <div className="container mx-auto md:flex justify-between items-center">
@@ -38,9 +51,12 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-1">
             <p>Wishlist</p>
-            <CiHeart />
+            <CiHeart className="md:text-2xl" />
           </div>
-          <Link to="/shoppingCart"><CiShoppingCart /></Link>
+          <div className="relative">
+          <Link to="/shoppingCart"><CiShoppingCart className="md:text-3xl" /></Link>
+          <h3 className="absolute -top-1 -right-1 bg-red-600 h-4 w-4 flex justify-center items-center rounded-full text-[12px] font-semibold">{cartItemNumber.length}</h3>
+          </div>
         </div>
       </div>
     </section>
