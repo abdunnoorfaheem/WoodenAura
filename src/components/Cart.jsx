@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageHeading from "./PageHeading";
 import cartImg from "../assets/shoppingCart.png";
 import { FaCheck } from "react-icons/fa6";
@@ -16,18 +16,44 @@ const Cart = () => {
     dispatch(increment(item));
   };
   let handleDecrement = (item) => {
-   
-      dispatch(decrement(item));
-    
+    dispatch(decrement(item));
   };
 
-  let handleDelateFromSingleCart=(index)=>{
+  let handleDelateFromSingleCart = (index) => {
     dispatch(deleteProduct(index));
-    
-  }
+  };
+
+  let [confirm, setConfirm] = useState(false);
+  let [selectedIndex, setSelectedIndex] = useState(null);
 
   return (
     <>
+      <div className="flex justify-center items-center ">
+        {confirm && (
+          <div className="relative">
+            <div className="bg-[#d4d1d173] border-2 w-[350px] h-[250px]  absolute top-40 text-black font-bold flex justify-center items-center z-10">
+              <h2 className="text-red-600 text-xl">Are you Sure!</h2>
+              <div>
+                <button
+                  className="bg-red-400 border-2 py-2 px-3"
+                  onClick={() => {
+                    handleDelateFromSingleCart(selectedIndex);
+                    setConfirm(false);
+                  }}
+                >
+                  Yes
+                </button>
+                <button
+                  className="bg-green-400 border-2 py-2 px-3"
+                  onClick={() => setConfirm(false)}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
       <PageHeading title="Shopping Cart" pageName="Shopping cart" />
 
       <section>
@@ -50,10 +76,15 @@ const Cart = () => {
             {cartData.map((item, index) => (
               <div className="flex  md:gap-56 py-8 border-b-2">
                 <div className="flex relative items-center">
-                  
                   <img className="h-30 w-30" src={item.thumbnail} alt="" />
                   <div className="absolute -top-1 right-1 cursor-pointer">
-                  <ImCross onClick={()=>handleDelateFromSingleCart(index)} className="text-[18px] text-red-600" />
+                    <ImCross
+                      onClick={() => {
+                        setConfirm(true);
+                        setSelectedIndex(index);
+                      }}
+                      className="text-[18px] text-red-600 cursor-pointer"
+                    />
                   </div>
                   <div className="">
                     <p>{item.title}</p>
