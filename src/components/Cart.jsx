@@ -3,8 +3,9 @@ import PageHeading from "./PageHeading";
 import cartImg from "../assets/shoppingCart.png";
 import { FaCheck } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, deleteProduct, increment } from "./slice/cartSlice";
+import { clearCart, decrement, deleteProduct, increment } from "./slice/cartSlice";
 import { ImCross } from "react-icons/im";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   let cartData = useSelector((state) => state.cartItemSlice.cartItems);
@@ -26,12 +27,18 @@ const Cart = () => {
   let [confirm, setConfirm] = useState(false);
   let [selectedIndex, setSelectedIndex] = useState(null);
 
+  let handleClearCart=()=>{
+
+    dispatch(clearCart());
+    
+  }
+
   return (
     <>
       <div className="flex justify-center items-center ">
         {confirm && (
           <div className="relative">
-            <div className="bg-[#d4d1d173] border-2 w-[350px] h-[250px]  absolute top-40 text-black font-bold flex justify-center items-center z-10">
+            <div className="bg-[#d4d1d1be] border-2 w-[350px] h-[250px]  absolute top-40 text-black font-bold flex justify-center items-center z-10">
               <h2 className="text-red-600 text-xl">Are you Sure!</h2>
               <div>
                 <button
@@ -73,7 +80,8 @@ const Cart = () => {
                 Total
               </h4>
             </div>
-            {cartData.map((item, index) => (
+
+            {cartData.length > 0 ? cartData.map((item, index) => (
               <div className="flex  md:gap-56 py-8 border-b-2">
                 <div className="flex relative items-center">
                   <img className="h-30 w-30" src={item.thumbnail} alt="" />
@@ -113,10 +121,17 @@ const Cart = () => {
                   <p>${(item.price * item.qty).toFixed(2)}</p>
                 </div>
               </div>
-            ))}
+            ))
+            : 
+            <div className="">
+<button className="mt-4 px-4 py-2 bg-[#FB2E86] rounded-md text-white"><Link to='/shop'>Go To Shop</Link></button>
+            </div>
+            
+            }
+            
 
             <div className="flex justify-end items-center py-8">
-              <button className="bg-[#FB2E86] text-white px-4 py-2 rounded-md">
+              <button onClick={handleClearCart} className="bg-[#FB2E86] text-white px-4 py-2 rounded-md">
                 Clear Cart
               </button>
             </div>
