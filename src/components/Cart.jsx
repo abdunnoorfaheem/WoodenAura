@@ -10,22 +10,15 @@ const Cart = () => {
 
   // console.log(cartData);
 
-let dispatch=useDispatch();
-  let handleIncrement=(item)=>{
-    
-    dispatch(increment(item))
-    
-  }
-  let handleDecrement=(item)=>{
-    
-    
+  let dispatch = useDispatch();
+  let handleIncrement = (item) => {
+    dispatch(increment(item));
+  };
+  let handleDecrement = (item) => {
+   
       dispatch(decrement(item));
-  
-
     
-    
-    
-  }
+  };
 
   return (
     <>
@@ -48,7 +41,7 @@ let dispatch=useDispatch();
                 Total
               </h4>
             </div>
-            {cartData.map((item,index) => (
+            {cartData.map((item, index) => (
               <div className="flex  md:gap-56 py-8 border-b-2">
                 <div className="flex ">
                   <img src={item.thumbnail} alt="" />
@@ -61,12 +54,22 @@ let dispatch=useDispatch();
                   <p>${item.price}</p>
                 </div>
                 <div className="w-[20%] h-[10%] flex">
-                  <p onClick={()=>handleDecrement(index)} className="border-2 p-2 text-red-500 font-bold">-</p>
+                  <p
+                    onClick={() => handleDecrement(index)}
+                    className="border-2 p-2 text-red-500 font-bold"
+                  >
+                    -
+                  </p>
                   <p className="border-2 p-2">{item.qty}</p>
-                  <p onClick={()=>handleIncrement(index)} className="border-2 p-2 text-green-500">+</p>
+                  <p
+                    onClick={() => handleIncrement(index)}
+                    className="border-2 p-2 text-green-500"
+                  >
+                    +
+                  </p>
                 </div>
                 <div>
-                  <p>${item.price}</p>
+                  <p>${(item.price * item.qty).toFixed(2)}</p>
                 </div>
               </div>
             ))}

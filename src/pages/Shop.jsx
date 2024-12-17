@@ -99,7 +99,7 @@ const Shop = () => {
 
   let handleAddToCart = (product) => {
     dispatch(addToCart({ ...product, qty: 1 }));
-    toast.success('🦄 Cart Added Successfully!');
+    toast.success('🦄 Added to Cart Successfully!');
   };
 
 
