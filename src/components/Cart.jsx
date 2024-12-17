@@ -3,7 +3,8 @@ import PageHeading from "./PageHeading";
 import cartImg from "../assets/shoppingCart.png";
 import { FaCheck } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "./slice/cartSlice";
+import { decrement, deleteProduct, increment } from "./slice/cartSlice";
+import { ImCross } from "react-icons/im";
 
 const Cart = () => {
   let cartData = useSelector((state) => state.cartItemSlice.cartItems);
@@ -19,6 +20,11 @@ const Cart = () => {
       dispatch(decrement(item));
     
   };
+
+  let handleDelateFromSingleCart=(index)=>{
+    dispatch(deleteProduct(index));
+    
+  }
 
   return (
     <>
@@ -43,8 +49,12 @@ const Cart = () => {
             </div>
             {cartData.map((item, index) => (
               <div className="flex  md:gap-56 py-8 border-b-2">
-                <div className="flex ">
-                  <img src={item.thumbnail} alt="" />
+                <div className="flex relative items-center">
+                  
+                  <img className="h-30 w-30" src={item.thumbnail} alt="" />
+                  <div className="absolute -top-1 right-1 cursor-pointer">
+                  <ImCross onClick={()=>handleDelateFromSingleCart(index)} className="text-[18px] text-red-600" />
+                  </div>
                   <div className="">
                     <p>{item.title}</p>
                     <p>Size:Xl</p>
