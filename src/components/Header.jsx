@@ -20,9 +20,9 @@ let cartItemNumber =useSelector((state)=>state.cartItemSlice.cartItems);
 
 
   return (
-    <section className="bg-[#7E33E0] text-white md:h-[44px] py-2 hidden md:block">
+    <section className="bg-[#7E33E0] text-white md:h-[44px] py-2">
       <div className="container mx-auto md:flex justify-between items-center">
-        <div className="md:flex gap-12">
+        <div className="hidden md:flex gap-12">
           <div className="flex items-center gap-2">
             <CiMail />
             <p>abdunnoor2450@gmail.com</p>
@@ -45,17 +45,17 @@ let cartItemNumber =useSelector((state)=>state.cartItemSlice.cartItems);
             </option>
             <option value="">BDT</option>
           </select>
-          <div className="flex items-center gap-1">
+          <div className="md:flex items-center gap-1">
             <CiUser />
             <p>Login</p>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="md:flex items-center gap-1">
             <p>Wishlist</p>
             <CiHeart className="md:text-2xl" />
           </div>
           <div className="relative">
-          <Link to="/shoppingCart"><CiShoppingCart className="md:text-3xl" /></Link>
-          <h3 className="absolute -top-1 -right-1 bg-red-600 h-4 w-4 flex justify-center items-center rounded-full text-[12px] font-semibold">{cartItemNumber.length}</h3>
+          <Link to="/shoppingCart"><CiShoppingCart className="text-2xl md:text-3xl" /></Link>
+          <h3 className="absolute top-0 left-3 md:-top-1 md:-right-1 bg-red-600 h-4 w-4 flex justify-center items-center rounded-full md:text-[12px] font-semibold text-[9px]">{cartItemNumber.length}</h3>
           </div>
         </div>
       </div>

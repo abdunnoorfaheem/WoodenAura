@@ -3,7 +3,12 @@ import PageHeading from "./PageHeading";
 import cartImg from "../assets/shoppingCart.png";
 import { FaCheck } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, decrement, deleteProduct, increment } from "./slice/cartSlice";
+import {
+  clearCart,
+  decrement,
+  deleteProduct,
+  increment,
+} from "./slice/cartSlice";
 import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
 
@@ -27,11 +32,9 @@ const Cart = () => {
   let [confirm, setConfirm] = useState(false);
   let [selectedIndex, setSelectedIndex] = useState(null);
 
-  let handleClearCart=()=>{
-
+  let handleClearCart = () => {
     dispatch(clearCart());
-    
-  }
+  };
 
   return (
     <>
@@ -81,60 +84,65 @@ const Cart = () => {
               </h4>
             </div>
 
-            {cartData.length > 0 ? cartData.map((item, index) => (
-              <div className="flex  md:gap-56 py-8 border-b-2">
-                <div className="flex relative items-center">
-                  <img className="h-30 w-30" src={item.thumbnail} alt="" />
-                  <div className="absolute -top-1 right-1 cursor-pointer">
-                    <ImCross
-                      onClick={() => {
-                        setConfirm(true);
-                        setSelectedIndex(index);
-                      }}
-                      className="text-[18px] text-red-600 cursor-pointer"
-                    />
+            {cartData.length > 0 ? (
+              cartData.map((item, index) => (
+                <div className="flex  md:gap-56 py-8 border-b-2">
+                  <div className="flex relative items-center">
+                    <img className="h-30 w-30" src={item.thumbnail} alt="" />
+                    <div className="absolute -top-1 right-1 cursor-pointer">
+                      <ImCross
+                        onClick={() => {
+                          setConfirm(true);
+                          setSelectedIndex(index);
+                        }}
+                        className="text-[18px] text-red-600 cursor-pointer"
+                      />
+                    </div>
+                    <div className="">
+                      <p>{item.title}</p>
+                      <p>Size:Xl</p>
+                    </div>
                   </div>
-                  <div className="">
-                    <p>{item.title}</p>
-                    <p>Size:Xl</p>
+                  <div>
+                    <p>${item.price}</p>
+                  </div>
+                  <div className="w-[20%] h-[10%] flex">
+                    <p
+                      onClick={() => handleDecrement(index)}
+                      className="border-2 p-2 text-red-500 font-bold"
+                    >
+                      -
+                    </p>
+                    <p className="border-2 p-2">{item.qty}</p>
+                    <p
+                      onClick={() => handleIncrement(index)}
+                      className="border-2 p-2 text-green-500"
+                    >
+                      +
+                    </p>
+                  </div>
+                  <div>
+                    <p>${(item.price * item.qty).toFixed(2)}</p>
                   </div>
                 </div>
-                <div>
-                  <p>${item.price}</p>
-                </div>
-                <div className="w-[20%] h-[10%] flex">
-                  <p
-                    onClick={() => handleDecrement(index)}
-                    className="border-2 p-2 text-red-500 font-bold"
-                  >
-                    -
-                  </p>
-                  <p className="border-2 p-2">{item.qty}</p>
-                  <p
-                    onClick={() => handleIncrement(index)}
-                    className="border-2 p-2 text-green-500"
-                  >
-                    +
-                  </p>
-                </div>
-                <div>
-                  <p>${(item.price * item.qty).toFixed(2)}</p>
-                </div>
+              ))
+            ) : (
+              <div className="">
+                <button className="mt-4 px-4 py-2 bg-[#FB2E86] rounded-md text-white">
+                  <Link to="/shop">Go To Shop</Link>
+                </button>
               </div>
-            ))
-            : 
-            <div className="">
-<button className="mt-4 px-4 py-2 bg-[#FB2E86] rounded-md text-white"><Link to='/shop'>Go To Shop</Link></button>
-            </div>
-            
-            }
-            
-
-            <div className="flex justify-end items-center py-8">
-              <button onClick={handleClearCart} className="bg-[#FB2E86] text-white px-4 py-2 rounded-md">
-                Clear Cart
-              </button>
-            </div>
+            )}
+            {cartData.length > 0 && (
+              <div className="flex justify-end items-center py-8">
+                <button
+                  onClick={handleClearCart}
+                  className="bg-[#FB2E86] text-white px-4 py-2 rounded-md"
+                >
+                  Clear Cart
+                </button>
+              </div>
+            )}
           </div>
           <div className="md:w-[35%]">
             <div>

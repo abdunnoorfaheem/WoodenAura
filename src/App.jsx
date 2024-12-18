@@ -13,6 +13,7 @@ import Shop from "./pages/Shop";
 import Contact from "./pages/Contact";
 import RootRouter from "./components/RootRouter";
 import ShoppingCart from "./pages/ShoppingCart";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   let myRoute = createBrowserRouter(
@@ -25,6 +26,7 @@ function App() {
         <Route path="/shop" element={<Shop/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/shoppingCart" element={<ShoppingCart/>}/>
+        <Route path="/productDetails" element={<ProductDetails/>}/>
       </Route>
     )
   );
