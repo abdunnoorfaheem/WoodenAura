@@ -60,7 +60,7 @@ const FeaturedProducts = () => {
             <div className="!w-[95%] rounded-md group shadow-md">
               <div className="md:flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden ">
                 <img className="" src={item.thumbnail} alt="Image" />
-                <Link to="/productDetails"><button className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:px-4  md:py-2  mt-2 px-[2px] py-[2px] bg-[#08D15F] rounded-sm text-white text-[12px] duration-700 ease-in-out  group-hover:bottom-4 ">
+                <Link to={`/shop/${item.id}`}><button className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:px-4  md:py-2  mt-2 px-[2px] py-[2px] bg-[#08D15F] rounded-sm text-white text-[12px] duration-700 ease-in-out  group-hover:bottom-4 ">
                   View Details
                 </button></Link>
                 

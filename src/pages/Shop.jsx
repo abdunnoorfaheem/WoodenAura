@@ -204,9 +204,9 @@ const Shop = () => {
               >
                 <div className="md:flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden">
                   <img className="" src={item.thumbnail} alt="Image" />
-                  <button className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:px-4 md:py-2 mt-2 px-[2px] py-[2px] bg-[#08D15F] rounded-sm text-white text-[12px] duration-700 ease-in-out group-hover:bottom-4">
+                  <Link to={`/shop/${item.id}`}><button className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:px-4 md:py-2 mt-2 px-[2px] py-[2px] bg-[#08D15F] rounded-sm text-white text-[12px] duration-700 ease-in-out group-hover:bottom-4">
                     View Details
-                  </button>
+                  </button></Link>
                   <div className="mt-2 flex absolute top-0 -left-32 group-hover:left-2 gap-1 duration-700 ease-in-out">
                     <p>
                       <CiShoppingCart className="md:text-4xl text-purple-900 md:p-2 hover:bg-[#FFFFFF] rounded-2xl" />

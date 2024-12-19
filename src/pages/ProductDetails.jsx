@@ -3,21 +3,41 @@ import PageHeading from "../components/PageHeading";
 import Company from "../components/Company";
 import Bag from '../assets/bag.png';
 import { FaStar } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useContext } from "react";
+import { apiData } from "../components/ContextApi";
 
 const ProductDetails = () => {
+
+
+  let product=useParams();
+
+
+  let data=useContext(apiData);
+  
+  
+  let singleProduct=data.filter((item)=>item.id == product.id)
+
+  // console.log(singleProduct);
+  
+  
+
+
+
+
   return (
     <>
       <PageHeading title="Product Details" pageName="Product Details" />
       <section>
         <div className="container mx-auto  my-8">
-          <div className="flex justify-center items-center shadow-2xl">
+          {singleProduct.map((item)=>(
+            <div className="flex justify-center items-center shadow-2xl">
             <div className="w-[40%]">
-                <img src={Bag} alt="" />
+                <img src={item.thumbnail} alt="" />
             </div>
             <div className="w-[60%]">
                 <div className="">
-                    <h3 className="md:text-[36px] text-[#0D134E] font-bold">Playwood arm chair</h3>
+                    <h3 className="md:text-[36px] text-[#0D134E] font-bold">{item.title}</h3>
                     <div className="flex mt-3">
                         <p><FaStar  className="text-[#FFC416]"/></p>
                         <p><FaStar  className="text-[#FFC416]"/></p>
@@ -26,8 +46,8 @@ const ProductDetails = () => {
                         <p><FaStar  className="text-[#FFC416]"/></p>
                     </div>
                     <div className="flex gap-2 mt-3 text-[22px]">
-                        <p className="text-[#151875]">$32.00</p>
-                        <p className="text-[#FB2E86]"><del>42.00</del></p>
+                        <p className="text-[#151875]">${item.price}</p>
+                        <p className="text-[#FB2E86]"><del>${item.discount}</del></p>
                     </div>
                     <div className="mt-2 text-[18px]">
                         <p>Color</p>
@@ -41,6 +61,8 @@ const ProductDetails = () => {
                 </div>
             </div>
           </div>
+          ))}
+          
         </div>
       </section>
       <Company />
