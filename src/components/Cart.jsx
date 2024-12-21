@@ -36,6 +36,23 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
+
+
+  let {totalPrice,totalQty}=cartData.reduce((acc,item)=>{
+
+    acc.totalPrice += (item.price*item.qty);
+    acc.totalQty+=item.qty;
+
+   
+  
+return acc;
+  },{totalPrice:0,totalQty:0})
+
+  console.log(totalPrice,totalQty);
+  
+
+
+
   return (
     <>
       <div className="flex justify-center items-center ">
@@ -105,6 +122,7 @@ const Cart = () => {
                   </div>
                   <div>
                     <p>${item.price}</p>
+                    
                   </div>
                   <div className="w-[20%] h-[10%] flex">
                     <p
@@ -152,8 +170,14 @@ const Cart = () => {
               <div className="bg-[#E8E6F1] mt-4 rounded-md">
                 <div className="flex justify-between py-8 px-8">
                   <p className="border-b-2 text-xl font-semibold">Total:</p>
-                  <p className="border-b-2 text-xl font-semibold">$2300.00</p>
+                  <p className="border-b-2 text-xl font-semibold">${totalPrice.toFixed(2)}</p>
+                  
+                  
                 </div>
+                <div className="flex justify-between py-8 px-8">
+                  <p className="border-b-2 text-xl font-semibold">Total Quantity :</p>
+                  <p className="border-b-2 text-xl font-semibold">{totalQty}</p>
+                  </div>
                 <div className="flex items-center justify-center">
                   <FaCheck className="border-2 text-white bg-[#19D16F] rounded-lg" />
                   <p className="text-[#8A91AB] text-lg py-3">

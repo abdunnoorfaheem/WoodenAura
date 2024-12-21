@@ -47,7 +47,7 @@ const ProductDetails = () => {
                     </div>
                     <div className="flex gap-2 mt-3 text-[22px]">
                         <p className="text-[#151875]">${item.price}</p>
-                        <p className="text-[#FB2E86]"><del>${item.discount}</del></p>
+                        <p className="text-[#FB2E86]"><del>${item.discountPercentage}</del></p>
                     </div>
                     <div className="mt-2 text-[18px]">
                         <p>Color</p>
