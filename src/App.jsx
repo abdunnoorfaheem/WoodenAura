@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import RootRouter from "./components/RootRouter";
 import ShoppingCart from "./pages/ShoppingCart";
 import ProductDetails from "./pages/ProductDetails";
+import Login from "./pages/Login";
 
 function App() {
   let myRoute = createBrowserRouter(
@@ -27,6 +28,7 @@ function App() {
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/shoppingCart" element={<ShoppingCart/>}/>
         <Route path="/shop/:id" element={<ProductDetails/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Route>
     )
   );

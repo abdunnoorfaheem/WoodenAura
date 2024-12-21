@@ -14,9 +14,6 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   let cartData = useSelector((state) => state.cartItemSlice.cartItems);
-
-  // console.log(cartData);
-
   let dispatch = useDispatch();
   let handleIncrement = (item) => {
     dispatch(increment(item));
@@ -25,7 +22,7 @@ const Cart = () => {
     dispatch(decrement(item));
   };
 
-  let handleDelateFromSingleCart = (index) => {
+  let handleDeleteFromSingleCart = (index) => {
     dispatch(deleteProduct(index));
   };
 
@@ -36,42 +33,34 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
-
-
-  let {totalPrice,totalQty}=cartData.reduce((acc,item)=>{
-
-    acc.totalPrice += (item.price*item.qty);
-    acc.totalQty+=item.qty;
-
-   
-  
-return acc;
-  },{totalPrice:0,totalQty:0})
-
-  console.log(totalPrice,totalQty);
-  
-
-
+  let { totalPrice, totalQty } = cartData.reduce(
+    (acc, item) => {
+      acc.totalPrice += item.price * item.qty;
+      acc.totalQty += item.qty;
+      return acc;
+    },
+    { totalPrice: 0, totalQty: 0 }
+  );
 
   return (
     <>
-      <div className="flex justify-center items-center ">
+      <div className="flex justify-center items-center">
         {confirm && (
-          <div className="relative">
-            <div className="bg-[#d4d1d1be] border-2 w-[350px] h-[250px]  absolute top-40 text-black font-bold flex justify-center items-center z-10">
-              <h2 className="text-red-600 text-xl">Are you Sure!</h2>
-              <div>
+          <div className="relative z-50">
+            <div className="bg-gray-300 border w-[90%] md:w-[350px] h-[250px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center rounded-md shadow-lg">
+              <h2 className="text-red-600 text-xl mb-4">Are you sure?</h2>
+              <div className="flex gap-4">
                 <button
-                  className="bg-red-400 border-2 py-2 px-3"
+                  className="bg-red-500 text-white py-2 px-4 rounded-md"
                   onClick={() => {
-                    handleDelateFromSingleCart(selectedIndex);
+                    handleDeleteFromSingleCart(selectedIndex);
                     setConfirm(false);
                   }}
                 >
                   Yes
                 </button>
                 <button
-                  className="bg-green-400 border-2 py-2 px-3"
+                  className="bg-green-500 text-white py-2 px-4 rounded-md"
                   onClick={() => setConfirm(false)}
                 >
                   No
@@ -81,71 +70,71 @@ return acc;
           </div>
         )}
       </div>
+
       <PageHeading title="Shopping Cart" pageName="Shopping cart" />
 
-      <section>
-        <div className="container mx-auto md:flex justify-evenly">
-          <div className="md:w-[60%]">
-            <div className="flex md:justify-between md:gap-0 gap-6 ml-16">
-              <h4 className="font-semibold underline text-[#1D3178] md:text-2xl">
-                Product
-              </h4>
-              <h4 className="font-semibold underline text-[#1D3178] md:text-2xl">
-                Price
-              </h4>
-              <h4 className="font-semibold underline text-[#1D3178] md:text-2xl">
+      <section className="container mx-auto px-4 my-8">
+        <div className="md:flex md:justify-between gap-8">
+         
+          <div className="md:w-2/3">
+            <div className="hidden md:flex justify-between border-b-2 pb-2">
+              <h4 className="font-semibold text-[#1D3178] text-lg">Product</h4>
+              <h4 className="font-semibold text-[#1D3178] text-lg">Price</h4>
+              <h4 className="font-semibold text-[#1D3178] text-lg">
                 Quantity
               </h4>
-              <h4 className="font-semibold underline text-[#1D3178] md:text-2xl">
-                Total
-              </h4>
+              <h4 className="font-semibold text-[#1D3178] text-lg">Total</h4>
             </div>
 
             {cartData.length > 0 ? (
               cartData.map((item, index) => (
-                <div className="flex  md:gap-56 py-8 border-b-2">
-                  <div className="flex relative items-center">
-                    <img className="h-30 w-30" src={item.thumbnail} alt="" />
-                    <div className="absolute -top-1 right-1 cursor-pointer">
-                      <ImCross
-                        onClick={() => {
-                          setConfirm(true);
-                          setSelectedIndex(index);
-                        }}
-                        className="text-[18px] text-red-600 cursor-pointer"
-                      />
+                <div
+                  className="flex flex-wrap md:flex-nowrap items-center justify-between border-b-2 py-4 gap-4"
+                  key={index}
+                >
+                  <div className="flex items-center gap-4 w-full md:w-auto">
+                    <img
+                      className="h-20 w-20 object-cover rounded-md"
+                      src={item.thumbnail}
+                      alt={item.title}
+                    />
+                    <div>
+                      <p className="text-sm font-semibold">{item.title}</p>
+                      <p className="text-sm text-gray-600">Size: XL</p>
                     </div>
-                    <div className="">
-                      <p>{item.title}</p>
-                      <p>Size:Xl</p>
-                    </div>
+                    <ImCross
+                      onClick={() => {
+                        setConfirm(true);
+                        setSelectedIndex(index);
+                      }}
+                      className="text-red-600 text-lg cursor-pointer ml-auto"
+                    />
                   </div>
-                  <div>
-                    <p>${item.price}</p>
-                    
-                  </div>
-                  <div className="w-[20%] h-[10%] flex">
-                    <p
+                  <p className="text-sm md:text-md font-semibold text-center w-1/4">
+                    ${item.price}
+                  </p>
+                  <div className="flex items-center gap-2 w-1/4">
+                    <button
                       onClick={() => handleDecrement(index)}
-                      className="border-2 p-2 text-red-500 font-bold"
+                      className="bg-red-400 text-white px-3 py-1 rounded-md"
                     >
                       -
-                    </p>
-                    <p className="border-2 p-2">{item.qty}</p>
-                    <p
+                    </button>
+                    <span className="font-semibold">{item.qty}</span>
+                    <button
                       onClick={() => handleIncrement(index)}
-                      className="border-2 p-2 text-green-500"
+                      className="bg-green-400 text-white px-3 py-1 rounded-md"
                     >
                       +
-                    </p>
+                    </button>
                   </div>
-                  <div>
-                    <p>${(item.price * item.qty).toFixed(2)}</p>
-                  </div>
+                  <p className="text-sm md:text-md font-semibold text-center w-1/4">
+                    ${(item.price * item.qty).toFixed(2)}
+                  </p>
                 </div>
               ))
             ) : (
-              <div className="">
+              <div className="text-center py-8">
                 <button className="mt-4 px-4 py-2 bg-[#FB2E86] rounded-md text-white">
                   <Link to="/shop">Go To Shop</Link>
                 </button>
@@ -162,35 +151,30 @@ return acc;
               </div>
             )}
           </div>
-          <div className="md:w-[35%]">
-            <div>
-              <h3 className="text-[#1D3178] font-semibold text-center underline md:text-2xl">
+
+          
+          <div className="md:w-1/3">
+            <div className="bg-gray-100 p-6 rounded-md shadow-md">
+              <h3 className="text-[#1D3178] font-semibold text-lg mb-4">
                 Cart Total
               </h3>
-              <div className="bg-[#E8E6F1] mt-4 rounded-md">
-                <div className="flex justify-between py-8 px-8">
-                  <p className="border-b-2 text-xl font-semibold">Total:</p>
-                  <p className="border-b-2 text-xl font-semibold">${totalPrice.toFixed(2)}</p>
-                  
-                  
-                </div>
-                <div className="flex justify-between py-8 px-8">
-                  <p className="border-b-2 text-xl font-semibold">Total Quantity :</p>
-                  <p className="border-b-2 text-xl font-semibold">{totalQty}</p>
-                  </div>
-                <div className="flex items-center justify-center">
-                  <FaCheck className="border-2 text-white bg-[#19D16F] rounded-lg" />
-                  <p className="text-[#8A91AB] text-lg py-3">
-                    Shipping & taxes calculated at checkout
-                  </p>
-                </div>
-
-                <div className="">
-                  <button className="px-6 py-2 bg-[#19D16F] text-white font-semibold w-full border-2 border-green-500">
-                    Proceed To CheckOut
-                  </button>
-                </div>
+              <div className="flex justify-between mb-4">
+                <p className="font-semibold">Total:</p>
+                <p className="font-semibold">${totalPrice.toFixed(2)}</p>
               </div>
+              <div className="flex justify-between mb-4">
+                <p className="font-semibold">Total Quantity:</p>
+                <p className="font-semibold">{totalQty}</p>
+              </div>
+              <div className="flex items-center gap-2 mb-4">
+                <FaCheck className="text-green-500" />
+                <p className="text-sm text-gray-600">
+                  Shipping & taxes calculated at checkout
+                </p>
+              </div>
+              <button className="bg-green-500 text-white px-6 py-2 w-full rounded-md">
+                Proceed To Checkout
+              </button>
             </div>
           </div>
         </div>
