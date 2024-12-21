@@ -15,4 +15,4 @@ const PageHeading = (props) => {
   )
 }
 
-export default PageHeading
+export default PageHeading;
