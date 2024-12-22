@@ -48,8 +48,9 @@ const Header = () => {
 
           
           <div className="flex items-center gap-1 text-sm cursor-pointer">
+          <Link to="/login" className="flex gap-1">
             <CiUser className="text-xl" />
-            <Link to="/login"><p>Login</p></Link>
+            <p>Login</p></Link>
           </div>
 
          
