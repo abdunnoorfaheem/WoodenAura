@@ -1,67 +1,72 @@
-import React, { useContext } from 'react'
-import latestChair from '../assets/latestChair.png';
-import { CiShoppingCart } from "react-icons/ci";
-import { CiHeart } from "react-icons/ci";
-import { CiZoomIn } from "react-icons/ci";
-import { apiData } from './ContextApi';
+import React, { useContext } from "react";
+import { CiShoppingCart, CiHeart, CiZoomIn } from "react-icons/ci";
+import { apiData } from "./ContextApi";
 
 const LeatestProducts = () => {
-
-  let dataShow=useContext(apiData);
+  const dataShow = useContext(apiData);
 
   
-let filterData=dataShow.filter((item)=>item.id >=1 && item.id <=8)
-  
+  const filterData = dataShow.filter((item) => item.id >= 1 && item.id <= 8);
+
   return (
-    <section className=''>
-        <div>
-            <h2 className='text-2xl font-bold md:text-5xl text-center mt-12 text-[#1A0B5B]'>Leatest Products</h2>
-            <div className='flex justify-center gap-1 md:gap-10 mt-3'>
-              <h4 className='hover:text-[#FB4997] hover:underline ' >New Arrival</h4>
-              <h4 className='hover:text-[#FB4997] hover:underline '>Best Seller </h4>
-              <h4 className='hover:text-[#FB4997] hover:underline '>Featured</h4>
-              <h5 className='hover:text-[#FB4997] hover:underline '>Special Offer</h5>
-            </div>
+    <section className="container mx-auto py-10">
+      <div>
+        <h2 className="text-2xl font-bold md:text-5xl text-center mt-12 text-[#1A0B5B]">
+          Latest Products
+        </h2>
+        <div className="flex justify-center gap-1 md:gap-10 mt-3">
+          <h4 className="hover:text-[#FB4997] hover:underline">New Arrival</h4>
+          <h4 className="hover:text-[#FB4997] hover:underline">Best Seller</h4>
+          <h4 className="hover:text-[#FB4997] hover:underline">Featured</h4>
+          <h5 className="hover:text-[#FB4997] hover:underline">Special Offer</h5>
         </div>
-        <div className='flex flex-wrap gap-4 justify-center mt-5'>
-        {
-          filterData.map((item)=>(
-           <div className=' '>
-             <div className=''>
-            <div className=' bg-[#EEEFFB] flex justify-center items-center py-8 relative'>
-              <img src={item.thumbnail} alt="" />
-              <p className='bg-[#3F509E] text-white px-4 py-1 absolute top-12 left-9'>sale</p>
-              <div className="mt-2 flex">
-                 <p>
-                   <CiShoppingCart
-                     className="md:text-4xl text-purple-900 md:p-2 
-       hover:bg-[#FFFFFF] rounded-2xl"
-                   />
-                 </p>
-                 <p>
-                   <CiHeart className="md:text-4xl text-blue-900 md:p-2 hover:bg-[#FFFFFF] rounded-2xl" />
-                 </p>
-                 <p>
-                   <CiZoomIn className="md:text-4xl text-blue-900 md:p-2 hover:bg-[#FFFFFF] rounded-2xl" />
-                 </p>
-               </div>
+      </div>
+
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
+        {filterData.map((item) => (
+          <div
+            key={item.id}
+            className="relative bg-[#EEEFFB] flex flex-col items-center justify-center p-4 w-full transition duration-300 hover:shadow-lg group"
+          >
+            
+            <div className="relative w-full flex justify-center items-center h-52">
+              <img
+                src={item.thumbnail}
+                alt={item.title}
+                className="h-40 object-contain"
+              />
+              <p className="bg-[#3F509E] text-white px-4 py-1 absolute top-4 left-4">
+                sale
+              </p>
+
+              
+              <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition duration-300">
+                <CiShoppingCart
+                  className="text-3xl text-purple-900 bg-white p-2 rounded-full shadow-md hover:scale-110"
+                />
+                <CiHeart
+                  className="text-3xl text-red-600 bg-white p-2 rounded-full shadow-md hover:scale-110"
+                />
+                <CiZoomIn
+                  className="text-3xl text-blue-600 bg-white p-2 rounded-full shadow-md hover:scale-110"
+                />
+              </div>
             </div>
-            <div className='flex justify-between py-3 bg-[#F7F7F7] px-3'>
-              <h4>{item.title}</h4>
-              <div className='flex gap-4'>
-              <p>${item.price}</p>
-              <p>${item.discount}</p>
+
+            
+            <div className="w-full flex justify-between items-center py-3 bg-[#F7F7F7] px-4 mt-3">
+              <h4 className="text-sm font-semibold">{item.title}</h4>
+              <div className="flex items-center gap-2 text-sm">
+                <p className="text-gray-600 line-through">${item.discount}</p>
+                <p className="text-[#FB4997] font-bold">${item.price}</p>
               </div>
             </div>
           </div>
-           </div>
-
-          ))
-        }
-        </div>
-       
+        ))}
+      </div>
     </section>
-  )
-}
+  );
+};
 
-export default LeatestProducts
+export default LeatestProducts;

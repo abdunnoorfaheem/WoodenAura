@@ -6,18 +6,18 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const Login = () => {
   const auth = getAuth();
 
-  // State variables for email, password, and error message
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Handle form submission
+ 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent form from reloading the page
+    e.preventDefault(); 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log("Authentication successful");
-        // Clear the form and error message on success
+        
         setEmail("");
         setPassword("");
         setErrorMessage("");
