@@ -25,7 +25,7 @@ const Login = () => {
       .catch((error) => {
         let err = error.code;
 
-        // Display appropriate error messages
+        
         if (err.includes("auth/invalid-email")) {
           setErrorMessage("Email is not valid.");
         } else if (err.includes("auth/weak-password")) {
@@ -44,7 +44,7 @@ const Login = () => {
       <section className="min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-4">
           <div className="bg-white shadow-lg rounded-lg p-8 md:p-12 max-w-lg mx-auto">
-            <h3 className="text-[32px] font-bold text-center mb-4">Register</h3>
+            <h3 className="text-[32px] font-bold text-center mb-4">Log in</h3>
             <p className="text-[17px] text-[#9096B2] text-center mb-8">
               Please login using account details below.
             </p>
@@ -78,7 +78,7 @@ const Login = () => {
               </div>
 
               <div>
-                {/* Display error messages */}
+               
                 {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
                 <button
                   type="submit"

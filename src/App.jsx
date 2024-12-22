@@ -22,13 +22,14 @@ function App() {
       <Route element={<RootRouter />}>
         <Route path="/" element={<Home />} />
         <Route path="/pages" element={<Pages />} />
-        <Route path="/products" element={<Products/>}/>
-        <Route path="/blog" element={<Blog/>}/>
-        <Route path="/shop" element={<Shop/>}/>
-        <Route path="/contact" element={<Contact/>}/>
-        <Route path="/shoppingCart" element={<ShoppingCart/>}/>
-        <Route path="/shop/:id" element={<ProductDetails/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/products" element={<Products />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/shoppingCart" element={<ShoppingCart />} />
+        <Route path="/shop/:id" element={<ProductDetails />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
       </Route>
     )
   );
