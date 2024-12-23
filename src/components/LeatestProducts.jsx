@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { CiShoppingCart, CiHeart, CiZoomIn } from "react-icons/ci";
 import { apiData } from "./ContextApi";
+import { Link } from "react-router-dom";
 
 const LeatestProducts = () => {
   const dataShow = useContext(apiData);
@@ -42,9 +43,10 @@ const LeatestProducts = () => {
 
               
               <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition duration-300">
-                <CiShoppingCart
+                
+                <Link to="/shoppingCart"><CiShoppingCart
                   className="text-3xl text-purple-900 bg-white p-2 rounded-full shadow-md hover:scale-110"
-                />
+                /></Link>
                 <CiHeart
                   className="text-3xl text-red-600 bg-white p-2 rounded-full shadow-md hover:scale-110"
                 />

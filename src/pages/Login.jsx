@@ -6,26 +6,22 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const Login = () => {
   const auth = getAuth();
 
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
- 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log("Authentication successful");
-        
+      .then(() => {
         setEmail("");
         setPassword("");
         setErrorMessage("");
+        setIsModalOpen(true); 
       })
       .catch((error) => {
-        let err = error.code;
-
-        
+        const err = error.code;
         if (err.includes("auth/invalid-email")) {
           setErrorMessage("Email is not valid.");
         } else if (err.includes("auth/weak-password")) {
@@ -78,7 +74,6 @@ const Login = () => {
               </div>
 
               <div>
-               
                 {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
                 <button
                   type="submit"
@@ -100,6 +95,23 @@ const Login = () => {
           </div>
         </div>
       </section>
+
+      
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg p-6 shadow-lg w-80">
+            
+            <p className="text-green-700 mb-6 text-3xl">Successful!</p>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="w-full bg-[#FB2E86] text-white px-4 py-2 rounded-md font-semibold hover:bg-[#e12c78] transition duration-300"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <Company />
     </>
   );
