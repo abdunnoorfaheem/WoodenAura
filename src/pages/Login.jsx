@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import PageHeading from "../components/PageHeading";
 import Company from "../components/Company";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import "../firebase.config.js";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  let navigate = useNavigate();
   const auth = getAuth();
 
   const [email, setEmail] = useState("");
@@ -19,6 +23,9 @@ const Login = () => {
         setPassword("");
         setErrorMessage("");
         setIsModalOpen(true); 
+        setTimeout(()=>{
+          navigate('/signIn');
+        },2500);
       })
       .catch((error) => {
         const err = error.code;
@@ -40,7 +47,7 @@ const Login = () => {
       <section className="min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-4">
           <div className="bg-white shadow-lg rounded-lg p-8 md:p-12 max-w-lg mx-auto">
-            <h3 className="text-[32px] font-bold text-center mb-4">Log in</h3>
+            <h3 className="text-[32px] font-bold text-center mb-4">Sign Up</h3>
             <p className="text-[17px] text-[#9096B2] text-center mb-8">
               Please login using account details below.
             </p>
@@ -99,7 +106,7 @@ const Login = () => {
       
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-6 shadow-lg w-80">
+          <div className="bg-[#D1D5DB] rounded-lg p-6 shadow-lg w-80">
             
             <p className="text-green-700 mb-6 text-3xl">Successful!</p>
             <button
