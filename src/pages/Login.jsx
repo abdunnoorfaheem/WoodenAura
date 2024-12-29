@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import PageHeading from "../components/PageHeading";
 import Company from "../components/Company";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import "../firebase.config.js";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   let navigate = useNavigate();
   const auth = getAuth();
 
@@ -22,17 +25,22 @@ const Login = () => {
         setEmail("");
         setPassword("");
         setErrorMessage("");
-        setIsModalOpen(true); 
-        setTimeout(()=>{
-          navigate('/signIn');
-        },2500);
+        setIsModalOpen(true);
+        setTimeout(() => {
+          sendEmailVerification(auth.currentUser).then(() => {
+            console.log("Email Sent successfully");
+          });
+          navigate("/signIn");
+        }, 2500);
       })
       .catch((error) => {
         const err = error.code;
         if (err.includes("auth/invalid-email")) {
           setErrorMessage("Email is not valid.");
         } else if (err.includes("auth/weak-password")) {
-          setErrorMessage("Password is too weak. Must be at least 6 characters.");
+          setErrorMessage(
+            "Password is too weak. Must be at least 6 characters."
+          );
         } else if (err.includes("auth/email-already-in-use")) {
           setErrorMessage("This email is already in use.");
         } else {
@@ -49,7 +57,7 @@ const Login = () => {
           <div className="bg-white shadow-lg rounded-lg p-8 md:p-12 max-w-lg mx-auto">
             <h3 className="text-[32px] font-bold text-center mb-4">Sign Up</h3>
             <p className="text-[17px] text-[#9096B2] text-center mb-8">
-              Please login using account details below.
+              Please Create a account below.
             </p>
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
@@ -81,7 +89,9 @@ const Login = () => {
               </div>
 
               <div>
-                {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+                {errorMessage && (
+                  <p className="text-red-500 text-sm">{errorMessage}</p>
+                )}
                 <button
                   type="submit"
                   className="w-full bg-[#FB2E86] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#e12c78] transition duration-300"
@@ -103,11 +113,9 @@ const Login = () => {
         </div>
       </section>
 
-      
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-[#D1D5DB] rounded-lg p-6 shadow-lg w-80">
-            
             <p className="text-green-700 mb-6 text-3xl">Successful!</p>
             <button
               onClick={() => setIsModalOpen(false)}
