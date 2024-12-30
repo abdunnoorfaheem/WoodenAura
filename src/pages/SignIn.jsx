@@ -1,13 +1,64 @@
-import React from 'react';
+import React, { useState } from "react";
 import PageHeading from "../components/PageHeading";
 import Company from "../components/Company";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const auth = getAuth();
+
+  let navigate= useNavigate();
+
+   let handleEmail =(e)=>{
+    setEmail(e.target.value);
+   }
+
+   let handlePassword = (e)=>{
+    setPassword(e.target.value);
+   }
+  
+    let handleButtonSignin = (e)=>{
+
+      
+          e.preventDefault();
+      signInWithEmailAndPassword(auth, email, password)
+    .then((user) => {
+    
+      setTimeout(()=>{
+        if(user.user.emailVerified == true){
+          navigate("/")
+        }else{
+          alert("Verify Your Email!");
+        }
+
+        
+        
+      },2000)
+
+      // console.log(user);
+      
+      
+
+    })
+    .catch((error) => {
+
+      let err = error.code;
+      if (err.includes("auth/invalid-email")) {
+        setErrorMessage("Email or Password is not valid.");
+      }
+      
+      
+    });
+    }
+  
+
   return (
     <>
-    
-    
-    <PageHeading title="My Account" pageName="My Account" />
+      <PageHeading title="My Account" pageName="My Account" />
       <section className="min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-4">
           <div className="bg-white shadow-lg rounded-lg p-8 md:p-12 max-w-lg mx-auto">
@@ -18,6 +69,7 @@ const SignIn = () => {
             <form className="space-y-6">
               <div>
                 <input
+                onChange={handleEmail}
                   className="w-full border border-gray-300 outline-none p-3 rounded-md focus:ring-2 focus:ring-[#FB2E86]"
                   placeholder="Email Address"
                   type="email"
@@ -27,6 +79,7 @@ const SignIn = () => {
 
               <div>
                 <input
+                onChange={handlePassword}
                   className="w-full border border-gray-300 outline-none p-3 rounded-md focus:ring-2 focus:ring-[#FB2E86]"
                   placeholder="Password"
                   type="password"
@@ -41,8 +94,11 @@ const SignIn = () => {
               </div>
 
               <div>
-            
+              {errorMessage && (
+                  <p className="text-red-500 text-sm">{errorMessage}</p>
+                )}
                 <button
+                onClick={handleButtonSignin}
                   type="submit"
                   className="w-full bg-[#FB2E86] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#e12c78] transition duration-300"
                 >
@@ -62,14 +118,10 @@ const SignIn = () => {
           </div>
         </div>
       </section>
-    
 
       <Company />
-    
-    
-    
     </>
-  )
-}
+  );
+};
 
 export default SignIn;

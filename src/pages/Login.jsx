@@ -7,7 +7,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import "../firebase.config.js";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -28,7 +28,7 @@ const Login = () => {
         setIsModalOpen(true);
         setTimeout(() => {
           sendEmailVerification(auth.currentUser).then(() => {
-            console.log("Email Sent successfully");
+            alert("Email Sent successfully");
           });
           navigate("/signIn");
         }, 2500);
@@ -82,11 +82,11 @@ const Login = () => {
                 />
               </div>
 
-              <div className="text-right">
+              {/* <div className="text-right">
                 <p className="text-[#9096B2] text-[17px] hover:underline cursor-pointer">
                   Forgot your password?
                 </p>
-              </div>
+              </div> */}
 
               <div>
                 {errorMessage && (
@@ -100,14 +100,14 @@ const Login = () => {
                 </button>
               </div>
 
-              <div className="text-center">
+              <Link to="/signin"><div className="text-center">
                 <p className="text-[#9096B2] text-[17px]">
-                  Don’t have an Account?{" "}
+                  {/* Don’t have an Account?{" "} */}
                   <span className="text-[#FB2E86] font-semibold hover:underline cursor-pointer">
-                    Create account
+                    Log in
                   </span>
                 </p>
-              </div>
+              </div></Link>
             </form>
           </div>
         </div>
