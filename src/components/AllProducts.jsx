@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { apiData } from "./ContextApi";
+import { Link } from "react-router-dom";
 
 const AllProducts = () => {
   let data = useContext(apiData);
@@ -10,9 +11,9 @@ const AllProducts = () => {
     <>
       <section>
         <div className="container mx-auto py-8">
-          <div className="flex flex-wrap justify-between gap-4">
+          <div className="md:flex flex-wrap justify-between gap-4">
             {data.map((item) => (
-              <div className="w-[32%] shadow-xl px-3 py-4">
+              <div className="md:w-[32%] shadow-xl">
                 <div className="flex justify-center items-center">
                   <img src={item.thumbnail} alt="" />
                 </div>
@@ -24,13 +25,16 @@ const AllProducts = () => {
                     {item.description}
                   </p>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between py-2 px-4">
                     <p className="text-md md:text-xl  ">Price:{item.price}</p>
                     <p className="text-md md:text-xl  ">
-                      Discount-Percent: {item.discountPercentage}
+                      Discount-Percent: {item.discountPercentage}%
                     </p>
                   </div>
                 </div>
+                <Link to="/shop"><div>
+                    <button className="bg-[#FB2E86] w-full text-white py-2">Shop Now</button>
+                    </div></Link>
               </div>
             ))}
           </div>
