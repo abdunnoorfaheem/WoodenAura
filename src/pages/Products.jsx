@@ -1,8 +1,14 @@
 import React from 'react'
+import AllProducts from '../components/AllProducts'
+import PageHeading from '../components/PageHeading'
 
 const Products = () => {
   return (
-    <div>Products</div>
+    <>
+    <PageHeading title="All Products" pageName="All Products List" />
+    <AllProducts/>
+    
+    </>
   )
 }
 
