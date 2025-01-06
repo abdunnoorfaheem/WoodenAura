@@ -8,8 +8,9 @@ import "../Featured.css";
 const FeaturedProducts = () => {
   const dataAll = useContext(apiData);
 
-  // Filter featured products by category
-  const featuredProducts = dataAll.filter((item) => item.category === "fragrances");
+  const featuredProducts = dataAll.filter(
+    (item) => item.category === "fragrances"
+  );
 
   const settings = {
     dots: true,
@@ -19,7 +20,7 @@ const FeaturedProducts = () => {
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1200,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
@@ -27,17 +28,26 @@ const FeaturedProducts = () => {
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 992,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 576,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          arrows: false,
         },
       },
     ],
@@ -52,9 +62,7 @@ const FeaturedProducts = () => {
         <Slider {...settings}>
           {featuredProducts.map((item) => (
             <div key={item.id} className="w-full p-2">
-            
               <div className="rounded-md shadow-md group bg-white">
-                
                 <div className="relative bg-[#F6F7FB] py-6 flex items-center justify-center overflow-hidden">
                   <img
                     className="h-40 md:h-56 object-contain"
@@ -66,15 +74,12 @@ const FeaturedProducts = () => {
                       View Details
                     </button>
                   </Link>
-                  
                   <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 duration-300">
                     <CiShoppingCart className="text-lg md:text-2xl text-purple-900 hover:bg-white p-1 rounded-full cursor-pointer" />
                     <CiHeart className="text-lg md:text-2xl text-blue-900 hover:bg-white p-1 rounded-full cursor-pointer" />
                     <CiZoomIn className="text-lg md:text-2xl text-blue-900 hover:bg-white p-1 rounded-full cursor-pointer" />
                   </div>
                 </div>
-
-                
                 <div className="text-center py-4 group-hover:bg-[#2F1AC4] group-hover:text-white">
                   <h4 className="text-sm md:text-lg font-bold group-hover:text-white">
                     {item.title}
@@ -85,7 +90,9 @@ const FeaturedProducts = () => {
                     <span className="h-2 w-4 bg-blue-700 rounded-full"></span>
                   </div>
                   <p className="text-xs md:text-sm mt-2">Code: Y523201</p>
-                  <p className="text-sm md:text-lg font-semibold mt-2">${item.price}</p>
+                  <p className="text-sm md:text-lg font-semibold mt-2">
+                    ${item.price}
+                  </p>
                 </div>
               </div>
             </div>

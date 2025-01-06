@@ -11,7 +11,7 @@ const AllProducts = () => {
     <>
       <section>
         <div className="container mx-auto py-8">
-          <div className="md:flex flex-wrap justify-between gap-4">
+          <div className="md:flex flex-wrap justify-between gap-4 p-4">
             {data.map((item) => (
               <div className="md:w-[32%] shadow-xl">
                 <div className="flex justify-center items-center">

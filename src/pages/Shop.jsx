@@ -99,10 +99,8 @@ const Shop = () => {
 
   let handleAddToCart = (product) => {
     dispatch(addToCart({ ...product, qty: 1 }));
-    toast.success('🦄 Added to Cart Successfully!');
+    toast.success("🦄 Added to Cart Successfully!");
   };
-
-
 
   return (
     <>
@@ -110,7 +108,6 @@ const Shop = () => {
       <div className="container mx-auto">
         <div className="md:flex">
           <div className="w-full md:w-[30%]">
-            {/* Category Filter */}
             <div className="mb-3">
               <h3
                 onClick={() => setCategoryShow(!categoryShow)}
@@ -133,7 +130,6 @@ const Shop = () => {
               )}
             </div>
 
-            {/* Brand Filter */}
             <div>
               <h3
                 onClick={() => setBrandShow(!brandShow)}
@@ -156,7 +152,6 @@ const Shop = () => {
               )}
             </div>
 
-            {/* Price Filter */}
             <div>
               <h3
                 onClick={() => setPriceShow(!priceShow)}
@@ -195,7 +190,6 @@ const Shop = () => {
             </div>
           </div>
 
-          {/* Product Listing */}
           <div className="md:w-[70%] px-4 mt-4 mb-4 container mx-auto md:flex justify-between flex-wrap gap-6">
             {filteredData.map((item) => (
               <div
@@ -204,9 +198,11 @@ const Shop = () => {
               >
                 <div className="md:flex flex-col justify-center items-center bg-[#F6F7FB] py-6 relative overflow-hidden">
                   <img className="" src={item.thumbnail} alt="Image" />
-                  <Link to={`/shop/${item.id}`}><button className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:px-4 md:py-2 mt-2 px-[2px] py-[2px] bg-[#08D15F] rounded-sm text-white text-[12px] duration-700 ease-in-out group-hover:bottom-4">
-                    View Details
-                  </button></Link>
+                  <Link to={`/shop/${item.id}`}>
+                    <button className="absolute -bottom-16 left-1/2 -translate-x-1/2 md:px-4 md:py-2 mt-2 px-[2px] py-[2px] bg-[#08D15F] rounded-sm text-white text-[12px] duration-700 ease-in-out group-hover:bottom-4">
+                      View Details
+                    </button>
+                  </Link>
                   <div className="mt-2 flex absolute top-0 -left-32 group-hover:left-2 gap-1 duration-700 ease-in-out">
                     <p>
                       <CiShoppingCart className="md:text-4xl text-purple-900 md:p-2 hover:bg-[#FFFFFF] rounded-2xl" />
@@ -238,18 +234,18 @@ const Shop = () => {
                     Add To Cart
                   </button>
                   <ToastContainer
-position="top-center"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="colored"
-transition: Bounce
-/>
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                    transition:Bounce
+                  />
                 </div>
               </div>
             ))}
@@ -257,14 +253,20 @@ transition: Bounce
         </div>
         <div>
           {numbers.length > 0 && (
-            <ul className="flex items-center justify-center md:gap-6 ">
-              <li className="border-2 p-2 font-semibold" onClick={handlePre}>
+            <ul className="flex flex-wrap items-center justify-center gap-2 md:gap-6 mt-4">
+              <li
+                className="border-2 px-4 py-2 font-semibold text-sm md:text-base cursor-pointer hover:bg-gray-200"
+                onClick={handlePre}
+              >
                 Previous
               </li>
               {numbers.map((item) => (
                 <li
-                  className={`px-3 py-2 border-2 ${
-                    currentPage == item ? "bg-black text-white" : ""
+                  key={item}
+                  className={`px-4 py-2 border-2 text-sm md:text-base cursor-pointer ${
+                    currentPage === item
+                      ? "bg-black text-white"
+                      : "hover:bg-gray-200"
                   }`}
                   onClick={() => setCurrentPage(item)}
                 >
@@ -272,7 +274,7 @@ transition: Bounce
                 </li>
               ))}
               <li
-                className="border-2 px-2 py-2 font-semibold"
+                className="border-2 px-4 py-2 font-semibold text-sm md:text-base cursor-pointer hover:bg-gray-200"
                 onClick={handleNext}
               >
                 Next
