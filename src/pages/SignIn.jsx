@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PageHeading from "../components/PageHeading";
 import Company from "../components/Company";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -11,50 +11,37 @@ const SignIn = () => {
 
   const auth = getAuth();
 
-  let navigate= useNavigate();
+  let navigate = useNavigate();
 
-   let handleEmail =(e)=>{
+  let handleEmail = (e) => {
     setEmail(e.target.value);
-   }
+  };
 
-   let handlePassword = (e)=>{
+  let handlePassword = (e) => {
     setPassword(e.target.value);
-   }
-  
-    let handleButtonSignin = (e)=>{
+  };
 
-      
-          e.preventDefault();
-      signInWithEmailAndPassword(auth, email, password)
-    .then((user) => {
-    
-      setTimeout(()=>{
-        if(user.user.emailVerified == true){
-          navigate("/")
-        }else{
-          alert("Verify Your Email!");
+  let handleButtonSignin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        setTimeout(() => {
+          if (user.user.emailVerified == true) {
+            navigate("/");
+          } else {
+            alert("Verify Your Email!");
+          }
+        }, 2000);
+
+        // console.log(user);
+      })
+      .catch((error) => {
+        let err = error.code;
+        if (err.includes("auth/invalid-email")) {
+          setErrorMessage("Email or Password is not valid.");
         }
-
-        
-        
-      },2000)
-
-      // console.log(user);
-      
-      
-
-    })
-    .catch((error) => {
-
-      let err = error.code;
-      if (err.includes("auth/invalid-email")) {
-        setErrorMessage("Email or Password is not valid.");
-      }
-      
-      
-    });
-    }
-  
+      });
+  };
 
   return (
     <>
@@ -69,7 +56,7 @@ const SignIn = () => {
             <form className="space-y-6">
               <div>
                 <input
-                onChange={handleEmail}
+                  onChange={handleEmail}
                   className="w-full border border-gray-300 outline-none p-3 rounded-md focus:ring-2 focus:ring-[#FB2E86]"
                   placeholder="Email Address"
                   type="email"
@@ -79,7 +66,7 @@ const SignIn = () => {
 
               <div>
                 <input
-                onChange={handlePassword}
+                  onChange={handlePassword}
                   className="w-full border border-gray-300 outline-none p-3 rounded-md focus:ring-2 focus:ring-[#FB2E86]"
                   placeholder="Password"
                   type="password"
@@ -94,11 +81,11 @@ const SignIn = () => {
               </div>
 
               <div>
-              {errorMessage && (
+                {errorMessage && (
                   <p className="text-red-500 text-sm">{errorMessage}</p>
                 )}
                 <button
-                onClick={handleButtonSignin}
+                  onClick={handleButtonSignin}
                   type="submit"
                   className="w-full bg-[#FB2E86] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#e12c78] transition duration-300"
                 >
@@ -109,9 +96,11 @@ const SignIn = () => {
               <div className="text-center">
                 <p className="text-[#9096B2] text-[17px]">
                   Don’t have an Account?{" "}
-                  <span className="text-[#FB2E86] font-semibold hover:underline cursor-pointer">
-                    Create account
-                  </span>
+                  <Link to="/login">
+                    <span className="text-[#FB2E86] font-semibold hover:underline cursor-pointer">
+                      Create account
+                    </span>
+                  </Link>
                 </p>
               </div>
             </form>

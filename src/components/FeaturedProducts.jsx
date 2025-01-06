@@ -9,7 +9,7 @@ const FeaturedProducts = () => {
   const dataAll = useContext(apiData);
 
   const featuredProducts = dataAll.filter(
-    (item) => item.category === "fragrances"
+    (item) => item.category === "furniture"
   );
 
   const settings = {
