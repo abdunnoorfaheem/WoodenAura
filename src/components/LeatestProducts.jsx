@@ -24,11 +24,11 @@ const LeatestProducts = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-10 p-4 ">
         {filterData.map((item) => (
           <div
             key={item.id}
-            className="relative bg-[#EEEFFB] flex flex-col items-center justify-center p-4 w-full transition duration-300 hover:shadow-lg group"
+            className="relative bg-[#EEEFFB] flex flex-col items-center justify-center p-4 w-full transition duration-300 hover:shadow-lg group rounded-md"
           >
             <div className="relative w-full flex justify-center items-center h-52">
               <img

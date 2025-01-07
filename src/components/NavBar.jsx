@@ -64,7 +64,7 @@ const NavBar = () => {
                 isActive("/pages") ? "underline text-purple-700" : ""
               }`}
             >
-              <Link to="/pages">Pages</Link>
+              <Link to="/error">Pages</Link>
             </li>
             <li
               className={`hover:text-purple-900 ${
@@ -78,7 +78,7 @@ const NavBar = () => {
                 isActive("/blog") ? "underline text-purple-700" : ""
               }`}
             >
-              <Link to="/blog">Blog</Link>
+              <Link to="/error">Blog</Link>
             </li>
             <li
               className={`hover:text-purple-900 ${

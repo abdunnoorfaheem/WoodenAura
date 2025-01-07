@@ -54,10 +54,12 @@ const Header = () => {
           </div>
 
          
+          <Link to="/error">
           <div className="flex items-center gap-1 text-sm cursor-pointer">
             <p>Wishlist</p>
             <CiHeart className="text-xl" />
           </div>
+          </Link>
 
           
           <div className="relative cursor-pointer">

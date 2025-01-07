@@ -16,6 +16,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import ProductDetails from "./pages/ProductDetails";
 import Login from "./pages/Login";
 import SignIn from "./pages/SignIn";
+import ErrorPage from "./pages/ErrorPage";
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/shop/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login/>}/>
         <Route path="/signin" element={<SignIn/>}/>
+        <Route path="/error" element={<ErrorPage/>}/>
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
       </Route>
     )
